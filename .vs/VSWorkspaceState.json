@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\core",
+    "\\src\\app\\core\\services",
+    "\\src\\app\\core\\services\\editor",
+    "\\src\\app\\core\\services\\electron",
+    "\\src\\app\\core\\services\\figuresExport",
+    "\\src\\app\\core\\services\\odt2html",
+    "\\src\\boot"
+  ],
+  "SelectedNode": "\\package.json",
+  "PreviewInSolutionExplorer": false
+}

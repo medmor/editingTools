@@ -1,0 +1,53 @@
+<div class="card m-1">
+    <div class="card-header m-0 p-0">
+        <ng-container *ngTemplateOutlet="Bouttons"></ng-container>
+    </div>
+    <div class="car-body px-2">
+
+        <editable_area *ngIf="addingTitle||node.title" [text]="node.title" (textEvent)="node.title=$event" [label]="'Title'">
+        </editable_area>
+
+        <ng-container *ngIf="!hideContent&&node.type!='Figure'">
+            <editable_area *ngIf="addingContent||node.content" (textEvent)="node.content=$event" [text]="node.content"
+                           [label]="'Content'"></editable_area>
+            <div *ngIf="node.children.length>0">
+                <div *ngFor="let thisNode of node.children">
+                    <editor-course-node (nodeSelectd)="OnSelectNode($event)" [node]="thisNode"></editor-course-node>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="node.type=='Figure'&&!hideContent">
+            <img *ngIf="figureSrc" [src]="figureSrc" alt="bac-svt-ma.blogspot.com figure">
+        </ng-container>
+    </div>
+
+
+</div>
+
+<ng-template #Bouttons>
+
+    <div class="btn-group">
+        <select class="btn btn-sm btn-primary" [(ngModel)]="node.type">
+            <option *ngFor="let type of nodeTypes">
+                {{type}}
+            </option>
+        </select>
+        <button class="btn btn-sm btn-success" *ngIf="node.type=='Section'&&!node.title" (click)="addingTitle=true;">title</button>
+        <button class="btn btn-sm btn-success" *ngIf="node.type!='SimpleContent'&&node.type!='Figure'" (click)="addChildNode()">childe</button>
+        <button class="btn btn-sm btn-success" *ngIf="(node.type=='SimpleContent')&&!node.content"
+                (click)="addingContent=true;hideContent=false;">
+            content
+        </button>
+        <button class="btn btn-sm btn-success" *ngIf="node.type=='Figure'" (click)="readImageFromClipboard()">figure</button>
+    </div>
+    <div class="btn-group mx-2">
+        <button class="btn btn-sm btn-secondary" *ngIf="node.content||node.children.length"
+                (click)="hideContent=!hideContent" style="width:40px;">
+            {{hideContent?"+":"-"}}
+        </button>
+        <button class="btn btn-sm btn-danger" (click)="removeNode(node.index)" style="width:40px;">x</button>
+    </div>
+
+    <input class="input" type='radio' name="nodeChekBox" (change)="OnSelectNode(node)" />
+</ng-template>

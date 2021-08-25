@@ -1,0 +1,6 @@
+<div (click)="startEditing()" style="position:relative;margin-bottom:5px;min-height:40px;">
+    <label *ngIf="!text">{{label}}</label>
+    <ckeditor *ngIf="editing" #editorComponent [editor]="Editor" [(ngModel)]="text" (focusout)="onEditingEnds($event)">
+    </ckeditor>
+    <div *ngIf="!editing" [innerHTML]="text" style="display: inline;"></div>
+</div>
