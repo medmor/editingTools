@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { FigureExprotService } from "../../core/services/figuresExport/figureExport.service";
+import { Component } from '@angular/core';
+import { FigureExprotService } from '../../core/services/figuresExport/figureExport.service';
 
 @Component(
     {
