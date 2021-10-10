@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen, Menu } from 'electron';
+import { app, BrowserWindow, screen } from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as url from 'url';
@@ -9,13 +9,11 @@ require('@electron/remote/main').initialize();
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
-    serve = args.some(val => val === '--serve');
+    serve = args.some((val) => val === '--serve');
 
 function createWindow(): BrowserWindow {
-
     const electronScreen = screen;
     const size = electronScreen.getPrimaryDisplay().workAreaSize;
-
 
     // Create the browser window.
     win = new BrowserWindow({
@@ -25,10 +23,10 @@ function createWindow(): BrowserWindow {
         height: size.height,
         webPreferences: {
             nodeIntegration: true,
-            allowRunningInsecureContent: (serve) ? true : false,
-            contextIsolation: false,  // false if you want to run e2e test with Spectron
+            allowRunningInsecureContent: serve ? true : false,
+            contextIsolation: false, // false if you want to run e2e test with Spectron
             enableRemoteModule: true, // true if you want to run e2e test with Spectron or use remote module in renderer context (ie. Angular)
-            webSecurity: false
+            webSecurity: false,
         },
     });
 
@@ -37,7 +35,7 @@ function createWindow(): BrowserWindow {
     if (serve) {
         win.webContents.openDevTools();
         require('electron-reload')(__dirname, {
-            electron: require(path.join(__dirname, '/../node_modules/electron'))
+            electron: require(path.join(__dirname, '/../node_modules/electron')),
         });
         win.loadURL('http://localhost:4200');
     } else {
@@ -49,12 +47,13 @@ function createWindow(): BrowserWindow {
             pathIndex = '../dist/index.html';
         }
 
-        win.loadURL(url.format({
-            pathname: path.join(__dirname, pathIndex),
-            protocol: 'file:',
-            slashes: true
-        }));
-
+        win.loadURL(
+            url.format({
+                pathname: path.join(__dirname, pathIndex),
+                protocol: 'file:',
+                slashes: true,
+            }),
+        );
     }
 
     // Emitted when the window is closed.
@@ -95,7 +94,6 @@ try {
     app1.on('menu-back', () => {
         win.webContents.send('menu-back');
     });
-
 } catch (e) {
     // Catch Error
     // throw e;

@@ -6,7 +6,7 @@ import { ISectionNode } from '../../models';
     selector: 'app-odt2sections-viewer',
     template: `
         <div class="container-fluid">
-            <app-coursesections-veiwer [course]="rootSection"></app-coursesections-veiwer>
+            <app-coursesections-veiwer [course]="rootSection" [figures]="figures"></app-coursesections-veiwer>
         </div>
     `,
 })

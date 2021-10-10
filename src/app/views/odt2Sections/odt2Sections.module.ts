@@ -8,6 +8,10 @@ import { TableNodeViewerComponent } from './tableNodeViewer.component';
 import { TextNodeViewerComponent } from './textNodeViewer.component';
 import { UlNodeViewerComponent } from './ulNodeVewer.component';
 import { FormsModule } from '@angular/forms';
+// import { AngularFireModule } from '@angular/fire/compat';
+// import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+// import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+// import { APP_CONFIG } from '../../../environments/environment';
 
 @NgModule({
     declarations: [
@@ -19,6 +23,12 @@ import { FormsModule } from '@angular/forms';
         TextNodeViewerComponent,
         UlNodeViewerComponent,
     ],
-    imports: [CommonModule, FormsModule],
+    imports: [
+        CommonModule,
+        FormsModule,
+        // AngularFireModule.initializeApp(APP_CONFIG.firebase),
+        // AngularFireDatabaseModule,
+        // AngularFireStorageModule,
+    ],
 })
 export class Odt2SectionsModule {}

@@ -13,6 +13,7 @@ import { Odt2HtmlHomeComponent } from './odt2html/odt2htmlHome.component';
 import { Odt2HtmlViewerComponent } from './odt2html/odt2htmlViewer.component';
 import { FiguresExportComponent } from './figureExport/figruesExport.component';
 import { Odt2SectionsModule } from './odt2Sections/odt2Sections.module';
+import { M3uComponent } from './m3u/m3u.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { Odt2SectionsModule } from './odt2Sections/odt2Sections.module';
         Odt2HtmlHomeComponent,
         Odt2HtmlViewerComponent,
         FiguresExportComponent,
+        M3uComponent,
     ],
     imports: [CommonModule, ViewsRoutingModule, FormsModule, CKEditorModule, Odt2SectionsModule],
 })

@@ -9,6 +9,7 @@ import { Odt2HtmlViewerComponent } from './odt2html/odt2htmlViewer.component';
 import { FiguresExportComponent } from './figureExport/figruesExport.component';
 import { Odt2SectionsHomeComponent } from './odt2Sections/odt2SectionsHome.component';
 import { Odt2SectionsViewerComponent } from './odt2Sections/odt2SectionsVeiwer.component';
+import { M3uComponent } from './m3u/m3u.component';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: 'odt2sections/home', component: Odt2SectionsHomeComponent },
     { path: 'odt2sections/viewer', component: Odt2SectionsViewerComponent },
     { path: 'figure-export', component: FiguresExportComponent },
+    { path: 'm3u', component: M3uComponent },
 ];
 
 @NgModule({

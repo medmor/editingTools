@@ -47,7 +47,6 @@ export class Odt2SectionsService {
 
                     const body = doc.getElementsByTagName(NODE_NAMES.body)[0].children[0].childNodes;
                     const styles = doc.getElementsByTagName(NODE_NAMES.styles)[0];
-                    this.converter.converte(body, styles, figures);
 
                     observer.next({ section: this.converter.converte(body, styles, figures), figures });
                     zip.close();
@@ -84,9 +83,11 @@ class Converter {
     sections: ISectionNode[] = [];
     styles: Element;
     figures: Map<string, string>;
+    figureCount = 0;
 
     converte(content: NodeListOf<ChildNode>, styles: Element, figures: Map<string, string>): Section {
-        this.rootSection = new Course('tc', ['l', 'se'], '', [], null);
+        this.figureCount = 0;
+        this.rootSection = new Course(['tc'], ['s'], ['1'], '1', '', [], null);
         this.styles = styles;
         this.figures = figures;
         this.currentSectionLevel = '';
@@ -167,8 +168,11 @@ class Converter {
     parseParagrapheContent(nodeChildren: NodeListOf<ChildNode>, paragraphe: Text | Td) {
         for (const node of nodeChildren as any) {
             if (node.nodeName === NODE_NAMES.frame) {
-                const figureName = (node.childNodes[0] as Element).getAttribute('xlink:href').substr(9);
-                const figure = new Figure(figureName, this.sections[this.currentSectionLevel]);
+                const previousFigureName = (node.childNodes[0] as Element).getAttribute('xlink:href').substr(9);
+                const currentFigureName = 'figure' + this.figureCount++;
+                this.figures.set(currentFigureName, this.figures.get(previousFigureName));
+                this.figures.delete(previousFigureName);
+                const figure = new Figure(currentFigureName, this.sections[this.currentSectionLevel]);
                 this.sections[this.currentSectionLevel].content.push(figure);
             } else if (node.nodeName === NODE_NAMES.span) {
                 const span = new Text(node.textContent, [], paragraphe);

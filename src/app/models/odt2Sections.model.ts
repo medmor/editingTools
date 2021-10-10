@@ -2,6 +2,7 @@ export type SectionsTypes = 'section' | 'text' | 'figure' | 'li' | 'ul' | 'table
 export type TextStyles = 'bold' | 'uderline';
 export type Levels = 'tc' | '1bac' | '2bac';
 export type Branches = 'l' | 's' | 'se' | 'sm' | 'sp' | 'svt';
+export type Numbers = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10';
 
 export abstract class ISectionNode {
     constructor(public type: SectionsTypes, public content: string | ISectionNode[], public parent: ISectionNode) {}
@@ -14,7 +15,15 @@ export class Section extends ISectionNode {
 }
 
 export class Course extends Section {
-    constructor(public level: Levels, public branches: Branches[], title: string, content: ISectionNode[], parent: ISectionNode) {
+    constructor(
+        public levels: Levels[],
+        public branches: Branches[],
+        public units: Numbers[],
+        public chapter: Numbers,
+        title: string,
+        content: ISectionNode[],
+        parent: ISectionNode,
+    ) {
         super(title, '0', content, parent);
     }
 }
